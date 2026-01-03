@@ -1,34 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+const App = () => {
+  const course = 'Half Stack application development'
+  const part1 = 'Fundamentals of React'
+  const exercises1 = 10
+  const part2 = 'Using props to pass data'
+  const exercises2 = 7
+  const part3 = 'State of a component'
+  const exercises3 = 14
 
-function App() {
-  const [count, setCount] = useState(0)
+  function Header (props) {
+    return (
+      <h1>{props.course}</h1>
+    )
+  }
+
+  function Part (props) {
+    return (
+      <>
+        <p>{props.name}</p>
+        <p>{props.excercise}</p>
+        <p>{props.partNum}</p>
+      </>
+    )
+  }
+
+  function Content () {
+    return (
+      <>
+        <Part name={part1} excercise={exercises1} partNum="Part 1" />
+        <Part name={part2} excercise={exercises2} partNum="Part 2" />
+        <Part name={part3} excercise={exercises3} partNum="Part 3" />
+      </>  
+    )
+  }
+
+  function Total (props) {
+    return (
+        <p>Number of excercises {props.excercise.reduce((prev, curr) => prev + curr, 0)}</p>
+    )
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <Header course={course}/>
+      <Content />
+      <Total excercise={[exercises1, exercises2, exercises3]} />
+    </div>
   )
 }
 
